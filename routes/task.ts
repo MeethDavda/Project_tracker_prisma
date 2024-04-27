@@ -22,4 +22,18 @@ router.post("/addTask", async (req: Request, res: Response) => {
   res.send("Added task successfully").status(200);
 });
 
+router.get("/:userId", async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  try {
+    const allTasks = await prisma.task.findMany({
+      where: {
+        ownerId: Number(userId),
+      },
+    });
+    res.send(allTasks).status(200);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 export default router;
