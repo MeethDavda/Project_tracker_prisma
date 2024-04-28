@@ -17,22 +17,15 @@ model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
-  posts Post[]
   tasks Task[]
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
-}
+
 
 model Task {
   id  Int @id @default(autoincrement())
   status  String @default("Not completed")
+  name String 
   topic String
   date DateTime?
   comments  String
